@@ -10,24 +10,29 @@ pipeline {
         stage('build') {
             steps {
                 sh 'mvn install package'
+                sh 'make' 
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
         
         stage('Test') {
             steps {
-                echo 'testing....'
+                sh 'make check || true' 
+                junit '**/target/*.xml' 
             }
         }
         
-        stage('Release') {
-            steps {
-                echo 'Releasing....'
-            }
-        }
+       
         stage('Deploy') {
+            when {
+              expression {
+                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
+              }
+            }
             steps {
-                echo 'Deploying....'
+                sh 'make publish'
             }
         }
+    
     }
 }
