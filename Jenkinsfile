@@ -24,8 +24,8 @@ pipeline {
        
         stage('Deploy') {
             steps {
-                cd /var/lib/jenkins/workspace/mass2/target
-                cp '/var/lib/jenkins/workspace/mass2/target/mastan2.war' '/home/revathi/Downloads/apache-tomcat-7.0.88/webapps'
+                sh 'cd /var/lib/jenkins/workspace/mass2/target'
+               sh 'cp /var/lib/jenkins/workspace/mass2/target/mastan2.war /home/revathi/Downloads/apache-tomcat-7.0.88/webapps'
             }
         }
     
