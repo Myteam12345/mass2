@@ -9,7 +9,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                echo 'building the code.'
+                mvn install package
             }
         }
         
