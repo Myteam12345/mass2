@@ -9,7 +9,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh mvn install package
+                sh 'mvn install package'
             }
         }
         
