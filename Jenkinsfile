@@ -17,20 +17,15 @@ pipeline {
         
         stage('Test') {
             steps {
-                sh 'make check || true' 
-                junit '**/target/*.xml' 
+             
+                echo 'testing'
             }
         }
         
        
         stage('Deploy') {
-            when {
-              expression {
-                currentBuild.result == null || currentBuild.result == 'SUCCESS' 
-              }
-            }
-            steps {
-                sh 'make publish'
+            eps {
+                echo 'deploy'
             }
         }
     
